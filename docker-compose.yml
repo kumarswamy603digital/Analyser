@@ -1,0 +1,38 @@
+# Docker Compose for the Translator & Sentiment Analyser.
+# NOTE: Docker is NOT installed in this development environment; this file is
+# a correct template for deployment but has NOT been verified here.
+#
+# Key networking point: the frontend is served as STATIC files to the user's BROWSER.
+# The browser does NOT live inside the container network, so it reaches the backend
+# at the HOST-MAPPED port (localhost:8000), not at the service name "backend".
+# VITE_API_BASE_URL is a build-time variable embedded in the JS bundle.
+
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "8000:8000"
+    environment:
+      - CORS_ORIGINS=http://localhost:5173
+      - DEVICE=cpu
+      - HF_HOME=/app/HF_HOME
+    volumes:
+      - hf_cache:/app/HF_HOME
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+      args:
+        VITE_API_BASE_URL: http://localhost:8000
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+volumes:
+  hf_cache:

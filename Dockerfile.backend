@@ -1,0 +1,25 @@
+# Dockerfile for the backend service.
+# NOTE: Docker is not installed in this development environment.
+# This file is provided for deployment readiness and documented but NOT verified.
+
+FROM python:3.14-slim
+
+WORKDIR /app
+
+# Install system deps for sentencepiece (OPUS-MT tokenizer)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY backend/requirements.txt ./
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+COPY backend/app ./app
+
+EXPOSE 8000
+ENV HF_HOME=/app/HF_HOME
+ENV DEVICE=cpu
+
+# Startup: create HF cache dir then run uvicorn.
+CMD ["sh", "-c", "mkdir -p $HF_HOME && uvicorn app.main:app --host 0.0.0.0 --port 8000"]

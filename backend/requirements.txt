@@ -1,0 +1,27 @@
+# Backend dependencies for "Our Own Translator & Sentiment Analyser"
+# Python 3.14 compatible. CPU-only PyTorch by default (see install notes in README).
+# PyTorch CPU wheels are pulled from the official CPU index below.
+
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+# --- AI inference ---
+torch==2.14.1
+transformers==5.21.0
+accelerate==1.15.0
+sentencepiece==0.2.2
+huggingface-hub>=0.30
+
+# --- Web API ---
+fastapi>=0.115
+uvicorn[standard]>=0.30
+pydantic>=2.9
+pydantic-settings>=2.5
+
+# --- Evaluation ---
+scikit-learn>=1.5
+sacrebleu>=2.4
+
+# --- Testing ---
+pytest>=8.3
+pytest-asyncio>=0.24
+httpx>=0.27

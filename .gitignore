@@ -1,0 +1,66 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+srsamr/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+env3/
+.conda/
+
+# Testing / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Hugging Face model cache / weights (large, do not commit)
+HF_HOME/
+.hf_cache/
+models/
+*.safetensors
+*.bin
+*.onnx
+
+# Node / frontend
+node_modules/
+frontend/dist/
+frontend/.vite/
+coverage/
+*.local
+
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/

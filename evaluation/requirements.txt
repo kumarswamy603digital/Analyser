@@ -1,0 +1,2 @@
+# Additional evaluation-specific dependencies (backend requirements.txt already
+# includes scikit-learn and sacrebleu). Use the same venv as the backend.
